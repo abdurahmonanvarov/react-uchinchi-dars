@@ -34,7 +34,7 @@ function Register() {
     }
   }, [data]);
   return (
-    <div className="h-screen grid place-items-center w-full">
+    <div className="h-screen grid place-items-center w-full bg-white">
       <Form method="post" className="max-w-96 mx-auto w-full">
         <h1 className="text-4xl mb-5 text-center font-bold">Register</h1>
 

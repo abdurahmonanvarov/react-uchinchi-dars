@@ -12,21 +12,21 @@ export const action = async ({ request }) => {
 };
 function Login() {
   const { loginInWithEmailAndPassword } = useLogin();
-  const data = useActionData();
+  const malumot = useActionData();
 
   useEffect(() => {
-    if (data) {
-      if (!data.email) {
+    if (malumot) {
+      if (!malumot.email) {
         toast.warn("Iltimos emailni to'g'ri kiriting");
       }
-      if (!data.password) {
+      if (!malumot.password) {
         toast.warn("Iltimos parolni to'g'ti kiriting");
       }
-      loginInWithEmailAndPassword(data.email, data.password);
+      loginInWithEmailAndPassword(malumot.email, malumot.password);
     }
-  }, [data]);
+  }, [malumot]);
   return (
-    <div className="h-screen grid place-items-center w-full">
+    <div className="h-screen grid place-items-center w-full bg-white">
       <Form method="post" className="max-w-96 mx-auto w-full">
         <h1 className="text-4xl mb-5 text-center font-bold">Login</h1>
 
