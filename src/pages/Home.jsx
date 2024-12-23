@@ -22,7 +22,7 @@ function Home() {
   };
 
   return (
-    <div className="card bg-white h-screen w-96 shadow-xl m-3">
+    <div className="card bg-teal-900 h-screen w-96 shadow-xl m-3">
       <figure className="px-10 pt-10">
         <img
           src={user.photoURL}
