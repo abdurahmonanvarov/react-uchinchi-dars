@@ -20,6 +20,7 @@ function Home() {
   const handleLogout = () => {
     dispatch(logOut());
   };
+  //home retuten
 
   return (
     <div className="card bg-teal-900 h-screen w-96 shadow-xl m-3">
