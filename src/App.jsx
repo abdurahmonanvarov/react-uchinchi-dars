@@ -17,6 +17,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { authReadyAct, login } from "./app/featcher/userSlice";
 import { auth } from "./firebase/config";
 import { useDispatch } from "react-redux";
+import Create from "./pages/Create";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/create",
+          element: <Create />,
         },
       ],
     },
