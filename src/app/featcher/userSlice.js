@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isPending } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
   authReady: false,
+  isPending: false,
 };
 
 const userSlice = createSlice({
@@ -18,11 +19,14 @@ const userSlice = createSlice({
     authReadyAct: (state) => {
       state.authReady = true;
     },
+    setIsPending: (state, { payload }) => {
+      state.isPending = payload;
+    },
     // info: (state, { payload }) => {
     //   state.user = payload;
     // },
   },
 });
 
-export const { logOut, login, authReadyAct } = userSlice.actions;
+export const { logOut, login, authReadyAct, setIsPending } = userSlice.actions;
 export default userSlice.reducer;

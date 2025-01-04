@@ -1,36 +1,52 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import FormInput from "../components/FormInput";
 import { Form, Link, useActionData } from "react-router-dom";
 import { useRegister } from "../hoks/useRegister";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { validateSignupOrLoginData } from "../utiles";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
   const displayName = form.get("name");
   const email = form.get("email");
   const password = form.get("password");
-  const rePassword = form.get("rePassword");
-  return { email, password, displayName, rePassword };
+  const confirmPassword = form.get("confirmPassword");
+  return { email, password, displayName, confirmPassword };
 };
 
+//abdurahmon28255@gmail.com
+
 function Register() {
+  const { isPending } = useSelector((state) => state.user);
   const { registerWithEmailAndPassword } = useRegister();
+  const [error, setError] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const data = useActionData();
   useEffect(() => {
     if (data) {
-      if (!data.displayName) {
-        toast.warn("Iltimos ismingizni kiriting !");
+      const { valid, errors } = validateSignupOrLoginData(data, true);
+      if (valid) {
+        const { displayName, email, password } = data;
+        registerWithEmailAndPassword(displayName, email, password);
+      } else {
+        setError(errors);
       }
-      if (!data.email) {
-        toast.warn("Iltimos emailni kiriting !");
-      }
-      if (!data.password) {
-        toast.warn("Iltimos passwordni kiriting !");
-      }
-      if (data.password !== data.rePassword) {
-        toast.warn("Iltimos iltimos passwordni bir biriga o'xshatin !");
-      }
-      registerWithEmailAndPassword(data.displayName, data.email, data.password);
+      // if (!data.displayName) {
+      //   toast.warn("Iltimos ismingizni kiriting !");
+      // }
+      // if (!data.email) {
+      //   toast.warn("Iltimos emailni kiriting !");
+      // }
+      // if (!data.password) {
+      //   toast.warn("Iltimos passwordni kiriting !");
+      // }
+      // if (data.password !== data.rePassword) {
+      //   toast.warn("Iltimos iltimos passwordni bir biriga o'xshatin !");
+      // }
     }
   }, [data]);
   return (
@@ -43,26 +59,49 @@ function Register() {
           placeholder="Enter your name"
           label="Display Name"
           name="name"
+          error={error.displayName && "input-error"}
+          errorText={error.displayName}
         />
 
-        <FormInput type="email" placeholder="Enter your email" name="email" />
+        <FormInput
+          type="email"
+          placeholder="Enter your email"
+          name="email"
+          error={error.email && "input-error"}
+          errorText={error.email}
+        />
 
         <FormInput
           type="password"
           placeholder="Enter your password"
           name="password"
+          error={error.password && "input-error"}
+          errorText={error.password}
         />
 
         <FormInput
           type="password"
           placeholder="Re-enter your password"
-          name="rePassword"
+          name="confirmPassword"
+          error={error.confirmPassword && "input-error"}
+          errorText={error.confirmPassword}
         />
 
         <div className="my-5">
-          <button type="submit" className="btn btn-primary btn-block">
-            Register
-          </button>
+          {!isPending && (
+            <button type="submit" className="btn btn-primary btn-block">
+              Register
+            </button>
+          )}
+          {isPending && (
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              disabled
+            >
+              Loading...
+            </button>
+          )}
         </div>
 
         <div className="text-center">

@@ -3,6 +3,7 @@ import FormInput from "../components/FormInput";
 import { useEffect } from "react";
 import { useLogin } from "../hoks/useLogin";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -11,6 +12,7 @@ export const action = async ({ request }) => {
   return { email, password };
 };
 function Login() {
+  const { isPending } = useSelector((state) => state.user);
   const { loginInWithEmailAndPassword } = useLogin();
   const malumot = useActionData();
 
@@ -39,9 +41,20 @@ function Login() {
         />
 
         <div className="my-5">
-          <button type="submit" className="btn btn-primary btn-block">
-            Login
-          </button>
+          {!isPending && (
+            <button type="submit" className="btn btn-primary btn-block">
+              Login
+            </button>
+          )}
+          {isPending && (
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              disabled
+            >
+              Loading...
+            </button>
+          )}
         </div>
 
         <div className="text-center">

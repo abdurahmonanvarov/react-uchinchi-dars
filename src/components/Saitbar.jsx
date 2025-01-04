@@ -8,7 +8,7 @@ function Saitbar() {
   const { logeout } = useLogeOut();
   const { user } = useSelector((store) => store.user);
   return (
-    <div className="bg-violet-400 h-screen w-[350px] p-10 text-white pr-0 flex flex-col">
+    <div className="bg-violet-400 min-h-screen w-[350px] p-10 text-white pr-0 flex flex-col">
       <Avatar user={user} />
       <ul className="mt-3 mb-auto">
         <li className="nav-item w-full">
@@ -19,6 +19,11 @@ function Saitbar() {
         <li className="nav-item w-full">
           <NavLink className="block px-3 py-2 rounded-l-3xl" to="/create">
             Create
+          </NavLink>
+        </li>
+        <li className="nav-item w-full">
+          <NavLink className="block px-3 py-2 rounded-l-3xl" to="/setting">
+            Setting
           </NavLink>
         </li>
       </ul>

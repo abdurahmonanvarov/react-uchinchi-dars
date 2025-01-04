@@ -18,6 +18,10 @@ import { authReadyAct, login } from "./app/featcher/userSlice";
 import { auth } from "./firebase/config";
 import { useDispatch } from "react-redux";
 import Create from "./pages/Create";
+import { action as CreateAction } from "./pages/Create";
+import { action as Comment } from "./components/ProjectComponent ";
+import Setting from "./pages/Setting";
+import ProjectComponent from "./components/ProjectComponent ";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +42,16 @@ function App() {
         {
           path: "/create",
           element: <Create />,
+          action: CreateAction,
+        },
+        {
+          path: "/setting",
+          element: <Setting />,
+        },
+        {
+          path: "/conversation",
+          element: <ProjectComponent />,
+          action: Comment,
         },
       ],
     },

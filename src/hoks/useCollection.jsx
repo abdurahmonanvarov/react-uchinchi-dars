@@ -15,7 +15,6 @@ export function useCollection(collectionName) {
       setData(dataw);
     });
   }, [collectionName]);
-  console.log({ datam });
 
   return { datam };
 }
