@@ -13,10 +13,12 @@ export const action = async ({ request }) => {
   const confirmPassword = form.get("confirmPassword");
   return { email, password, displayName, confirmPassword };
 };
+import { useRegisterWithGoogle } from "../hoks/useRegisterWithGoogle";
 
 //abdurahmon28255@gmail.com
 
 function Register() {
+  const { siginInWithGoogle } = useRegisterWithGoogle();
   const { isPending } = useSelector((state) => state.user);
   const { registerWithEmailAndPassword } = useRegister();
   const [error, setError] = useState({
@@ -89,19 +91,26 @@ function Register() {
 
         <div className="my-5">
           {!isPending && (
-            <button type="submit" className="btn btn-primary btn-block">
+            <button type="submit" className="btn btn-primary btn-block mb-3">
               Register
             </button>
           )}
           {isPending && (
             <button
               type="submit"
-              className="btn btn-primary btn-block"
+              className="btn btn-primary btn-block mb-3"
               disabled
             >
               Loading...
             </button>
           )}
+          <button
+            onClick={siginInWithGoogle}
+            type="button"
+            className="btn btn-primary btn-block"
+          >
+            Google
+          </button>
         </div>
 
         <div className="text-center">

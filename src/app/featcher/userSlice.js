@@ -22,11 +22,15 @@ const userSlice = createSlice({
     setIsPending: (state, { payload }) => {
       state.isPending = payload;
     },
+    signIn: (state, { payload }) => {
+      state.user = payload;
+    },
     // info: (state, { payload }) => {
     //   state.user = payload;
     // },
   },
 });
 
-export const { logOut, login, authReadyAct, setIsPending } = userSlice.actions;
+export const { logOut, login, authReadyAct, setIsPending, signIn } =
+  userSlice.actions;
 export default userSlice.reducer;
