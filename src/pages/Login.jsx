@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useLogin } from "../hoks/useLogin";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useRegisterWithGoogle } from "../hoks/useRegisterWithGoogle";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -12,6 +13,7 @@ export const action = async ({ request }) => {
   return { email, password };
 };
 function Login() {
+  const { siginInWithGoogle } = useRegisterWithGoogle();
   const { isPending } = useSelector((state) => state.user);
   const { loginInWithEmailAndPassword } = useLogin();
   const malumot = useActionData();
@@ -42,19 +44,26 @@ function Login() {
 
         <div className="my-5">
           {!isPending && (
-            <button type="submit" className="btn btn-primary btn-block">
+            <button type="submit" className="btn btn-primary btn-block mb-3">
               Login
             </button>
           )}
           {isPending && (
             <button
               type="submit"
-              className="btn btn-primary btn-block"
+              className="btn btn-primary btn-block mb-3"
               disabled
             >
               Loading...
             </button>
           )}
+          <button
+            onClick={siginInWithGoogle}
+            type="button"
+            className="btn btn-primary btn-block"
+          >
+            Google
+          </button>
         </div>
 
         <div className="text-center">
