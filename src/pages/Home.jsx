@@ -20,7 +20,8 @@ function Home() {
         {datam &&
           datam.map((doc) => {
             return (
-              <div
+              <button
+                type="button"
                 onClick={handleCardClick}
                 key={doc.id}
                 className="card bg-base-100 w-60 shadow-xl cursor-pointer"
@@ -39,7 +40,7 @@ function Home() {
                     <h1>User photoURL</h1>
                   </div>
                 </div>
-              </div>
+              </button>
             );
           })}
       </div>
